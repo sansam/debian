@@ -1,7 +1,8 @@
 cat <<EOF>>/etc/apt/sources.list
 deb http://ftp.debian.org/debian wheezy-backports main contrib non-free
 EOF
-
+apt-get update
+apt-get install screen vim mlocate lsof -y
 echo "net.ipv6.conf.all.disable_ipv6 = 1 " >>  /etc/sysctl.conf
 sysctl -p
 #环境变量
