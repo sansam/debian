@@ -1,3 +1,7 @@
+cat <<EOF>>/etc/apt/sources.list
+deb http://ftp.debian.org/debian wheezy-backports main contrib non-free
+EOF
+
 echo "net.ipv6.conf.all.disable_ipv6 = 1 " >>  /etc/sysctl.conf
 sysctl -p
 #环境变量
