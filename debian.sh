@@ -4,6 +4,7 @@ EOF
 apt-get update
 apt-get -t wheezy-backports install libgmp3-dev m4 gcc pkg-config make gnutls-bin -y
 apt-get install screen vim mlocate lsof -y
+apt-get -t wheezy-backports install build-essential libwrap0-dev libpam0g-dev libdbus-1-dev libreadline-dev libnl-route-3-dev libprotobuf-c0-dev libpcl1-dev libopts25-dev autogen libgnutls28 libgnutls28-dev  libseccomp-dev -y
 echo "net.ipv6.conf.all.disable_ipv6 = 1 " >>  /etc/sysctl.conf
 sysctl -p
 #环境变量
