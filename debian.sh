@@ -2,6 +2,7 @@ cat <<EOF>>/etc/apt/sources.list
 deb http://ftp.debian.org/debian wheezy-backports main contrib non-free
 EOF
 apt-get update
+apt-get -t wheezy-backports install libgmp3-dev m4 gcc pkg-config make gnutls-bin -y
 apt-get install screen vim mlocate lsof -y
 echo "net.ipv6.conf.all.disable_ipv6 = 1 " >>  /etc/sysctl.conf
 sysctl -p
