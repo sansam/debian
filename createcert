@@ -1,0 +1,25 @@
+cd /usr/src
+wget ftp://ftp.infradead.org/pub/ocserv/ocserv-0.8.6.tar.xz
+tar -xvf ocserv-0.8.6.tar.xz
+cd ocserv-0.8.6
+./configure --prefix=/usr --sysconfdir=/etc && make && make install
+certtool --generate-privkey --outfile ca-key.pem
+certtool --generate-self-signed --load-privkey ca-key.pem --template ca.tmpl --outfile ca-cert.pem
+certtool --generate-privkey --outfile server-key.pem
+certtool --generate-certificate --load-privkey server-key.pem --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem --template server.tmpl --outfile server-cert.pem
+certtool --generate-privkey --outfile sansam-key.pem
+certtool --generate-certificate --load-privkey sansam-key.pem --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem --template client.tmpl --outfile sansam-cert.pem
+openssl pkcs12 -export -inkey sansam-key.pem -in sansam-cert.pem -name "sansam" -certfile ca-cert.pem -caname "uufly CA" -out client.cert.p12
+
+
+cp ca-cert.pem /etc/ocserv/certs
+cp ca-key.pem /etc/ocserv/private
+cp server-cert.pem /etc/ocserv/certs
+cp server-key.pem /etc/ocserv/private
+
+mkdir /etc/ocserv
+
+
+cat <<EOF>>/etc/sysctl.conf 
+net.ipv4.ip_forward=1
+EOF
