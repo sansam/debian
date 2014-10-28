@@ -1,2 +1,3 @@
+/usr/bin/ss-server /etc/ss.conf &
 /usr/sbin/tinyproxy  -c /etc/tinyproxy.conf &
 /usr/bin/stunnel4 /etc/stunnel/stunnel.conf &
